@@ -5,7 +5,7 @@ import com.example.manager.service.address.AddressService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +51,7 @@ public class Address {
   @ApiOperation(value = "Updates the address details.")
   @io.swagger.annotations.ApiResponses(
       value = {@ApiResponse(code = 200, message = "Record Updated.")})
-  @RequestMapping(value = "/updateById/{id}", method = RequestMethod.PUT)
+  @RequestMapping(value = "/updateById/{id}/", method = RequestMethod.PUT)
   public ResponseEntity<?> updateAddress(
       @Valid @RequestBody com.example.manager.data.Address addressa, @PathVariable("id") Long id) {
     return ResponseEntity.ok(manager.updateAddress(addressa, id));
