@@ -1,7 +1,7 @@
 package com.example.manager.data;
 
 import com.example.manager.data.constants.EducationType;
-import io.swagger.annotations.ApiModelProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -19,10 +19,10 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class Education {
 
-  @ApiModelProperty(hidden = true)
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
+  @JsonIgnore
   private Long id;
 
   @NotBlank(message = "Education name must not be empty")

@@ -1,6 +1,6 @@
 package com.example.manager.data;
 
-import io.swagger.annotations.ApiModelProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.util.Set;
@@ -33,10 +33,10 @@ public class Person {
     this.address = address;
   }
 
-  @ApiModelProperty(hidden = true)
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
+  @JsonIgnore
   private Long id;
 
   @NotBlank(message = "First Name can not be empty")

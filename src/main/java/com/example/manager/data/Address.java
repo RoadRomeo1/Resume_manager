@@ -1,6 +1,6 @@
 package com.example.manager.data;
 
-import io.swagger.annotations.ApiModelProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -20,10 +20,10 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class Address {
 
-  @ApiModelProperty(hidden = true)
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
+  @JsonIgnore
   private Long id;
 
   @NotNull(message = "House number can not be empty.")
