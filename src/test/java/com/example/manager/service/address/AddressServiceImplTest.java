@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import com.example.manager.data.Address;
 import com.example.manager.data.ResponseFormat;
+import com.example.manager.exception.address.AddressNotFoundException;
 import com.example.manager.repository.address.AddressRepository;
 import com.example.manager.util.TestData;
 import java.util.List;
@@ -43,7 +44,7 @@ class AddressServiceImplTest {
   }
 
   @Test
-  void addressFromId() {
+  void addressFromId() throws AddressNotFoundException {
     Address address = data.getAddressData(Long.valueOf(1));
 
     Mockito.when(repository.findById(address.getId())).thenReturn(Optional.of(address));
@@ -51,13 +52,13 @@ class AddressServiceImplTest {
     Address testAddress = manager.addressFromId(Long.valueOf(1));
 
     assertEquals(address.getId(), testAddress.getId());
-    assertEquals(address.getHouse_no(), testAddress.getHouse_no());
-    assertEquals(address.getAddress_details(), testAddress.getAddress_details());
+    assertEquals(address.getHouseNo(), testAddress.getHouseNo());
+    assertEquals(address.getAddressDetails(), testAddress.getAddressDetails());
     assertEquals(address.getLandmark(), testAddress.getLandmark());
-    assertEquals(address.getOther_landmark(), testAddress.getOther_landmark());
+    assertEquals(address.getOtherLandmark(), testAddress.getOtherLandmark());
     assertEquals(address.getCity(), testAddress.getCity());
     assertEquals(address.getCountry(), testAddress.getCountry());
-    assertEquals(address.getPin_code(), testAddress.getPin_code());
+    assertEquals(address.getPinCode(), testAddress.getPinCode());
   }
 
   @Test

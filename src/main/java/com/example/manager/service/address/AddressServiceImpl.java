@@ -2,9 +2,11 @@ package com.example.manager.service.address;
 
 import com.example.manager.data.Address;
 import com.example.manager.data.ResponseFormat;
+import com.example.manager.exception.address.AddressNotFoundException;
 import com.example.manager.repository.address.AddressRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,14 +19,18 @@ public class AddressServiceImpl implements AddressService {
 
   @Override
   public List<Address> listAllAddresses() {
-    List<Address> addressDataList = new ArrayList<Address>();
+    List<Address> addressDataList = new ArrayList<>();
     repo.findAll().forEach(addressDataList::add);
     return addressDataList;
   }
 
   @Override
-  public Address addressFromId(Long id) {
-    return repo.findById(id).get();
+  public Address addressFromId(Long id) throws AddressNotFoundException {
+    Optional<Address> addressData = repo.findById(id);
+    if (addressData.isEmpty()) {
+      throw new AddressNotFoundException("Address with " + id + " is not found");
+    }
+    return addressData.get();
   }
 
   @Override
@@ -38,8 +44,8 @@ public class AddressServiceImpl implements AddressService {
   }
 
   @Override
-  public ResponseFormat updateAddress(Address address, Long Id) {
-    address.setId(Id);
+  public ResponseFormat updateAddress(Address address, Long id) {
+    address.setId(id);
     repo.save(address);
     format.setStatus(HttpStatus.OK.value());
     format.setMessage("Record Updated");
@@ -49,8 +55,8 @@ public class AddressServiceImpl implements AddressService {
   }
 
   @Override
-  public ResponseFormat deleteAddress(Long Id) {
-    repo.deleteById(Id);
+  public ResponseFormat deleteAddress(Long id) {
+    repo.deleteById(id);
     format.setStatus(HttpStatus.OK.value());
     format.setMessage("Record Deleted");
     format.setTimeStamp(System.currentTimeMillis());
