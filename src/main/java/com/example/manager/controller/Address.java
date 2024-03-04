@@ -1,11 +1,13 @@
 package com.example.manager.controller;
 
+import com.example.manager.data.ResponseFormat;
 import com.example.manager.mapping.UrlMapper;
 import com.example.manager.service.address.AddressService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +25,8 @@ public class Address {
         @ApiResponse(code = 200, message = "Records Found"),
         @ApiResponse(code = 404, message = "Records Not Found")
       })
-  @RequestMapping(value = "/findAllAddress/", method = RequestMethod.GET)
-  public ResponseEntity<?> getAllAddress() {
+  @GetMapping(value = "/findAllAddress/")
+  public ResponseEntity<List<com.example.manager.data.Address>> getAllAddress() {
     return ResponseEntity.ok(manager.listAllAddresses());
   }
 
@@ -34,16 +36,17 @@ public class Address {
         @ApiResponse(code = 200, message = "Record Found"),
         @ApiResponse(code = 404, message = "Record not found")
       })
-  @RequestMapping(value = "/findById/{id}", method = RequestMethod.GET)
-  public ResponseEntity<?> getAddressFromId(@PathVariable("id") Long id) {
+  @GetMapping(value = "/findById/{id}")
+  public ResponseEntity<com.example.manager.data.Address> getAddressFromId(
+      @PathVariable("id") Long id) throws Exception {
     return ResponseEntity.ok(manager.addressFromId(id));
   }
 
   @ApiOperation(value = "Stores the Address")
   @io.swagger.annotations.ApiResponses(
       value = {@ApiResponse(code = 201, message = "Record Created")})
-  @RequestMapping(value = "/save/", method = RequestMethod.POST)
-  public ResponseEntity<?> saveAddress(
+  @PostMapping(value = "/save/")
+  public ResponseEntity<ResponseFormat> saveAddress(
       @Valid @RequestBody com.example.manager.data.Address address) {
     return ResponseEntity.status(HttpStatus.CREATED).body(manager.saveAddress(address));
   }
@@ -51,8 +54,8 @@ public class Address {
   @ApiOperation(value = "Updates the address details.")
   @io.swagger.annotations.ApiResponses(
       value = {@ApiResponse(code = 200, message = "Record Updated.")})
-  @RequestMapping(value = "/updateById/{id}/", method = RequestMethod.PUT)
-  public ResponseEntity<?> updateAddress(
+  @PutMapping(value = "/updateById/{id}/")
+  public ResponseEntity<ResponseFormat> updateAddress(
       @Valid @RequestBody com.example.manager.data.Address addressa, @PathVariable("id") Long id) {
     return ResponseEntity.ok(manager.updateAddress(addressa, id));
   }
@@ -60,16 +63,16 @@ public class Address {
   @ApiOperation(value = "Delete all address.")
   @io.swagger.annotations.ApiResponses(
       value = {@ApiResponse(code = 200, message = "All Records deleted.")})
-  @RequestMapping(value = "/deleteAll/", method = RequestMethod.DELETE)
-  public ResponseEntity<?> deleteAllAddress() {
+  @DeleteMapping(value = "/deleteAll/")
+  public ResponseEntity<ResponseFormat> deleteAllAddress() {
     return ResponseEntity.ok(manager.deleteAllAddress());
   }
 
   @ApiOperation(value = "Delete address from an Id.")
   @io.swagger.annotations.ApiResponses(
       value = {@ApiResponse(code = 200, message = "Record deleted.")})
-  @RequestMapping(value = "/deleteById/{id}", method = RequestMethod.DELETE)
-  public ResponseEntity<?> deleteAddress(@PathVariable("id") Long id) {
+  @DeleteMapping(value = "/deleteById/{id}")
+  public ResponseEntity<ResponseFormat> deleteAddress(@PathVariable("id") Long id) {
     return ResponseEntity.ok(manager.deleteAddress(id));
   }
 }

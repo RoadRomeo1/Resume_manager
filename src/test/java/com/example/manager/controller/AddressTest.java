@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.MvcResult;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class AddressTest {
+class AddressTest {
 
   @MockBean AddressService manager;
 
@@ -55,7 +55,7 @@ public class AddressTest {
     mvc.perform(get(uri + "/findAllAddress/"))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", Matchers.hasSize(1)))
-        .andExpect(jsonPath("$[0].address_details", Matchers.is("test street")));
+        .andExpect(jsonPath("$[0].addressDetails", Matchers.is("test street")));
   }
 
   @Test
@@ -66,7 +66,7 @@ public class AddressTest {
 
     mvc.perform(get(uri + "/findById/1"))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.address_details", Matchers.is("test street")))
+        .andExpect(jsonPath("$.addressDetails", Matchers.is("test street")))
         .andExpect(jsonPath("$.id", Matchers.is(1)));
   }
 

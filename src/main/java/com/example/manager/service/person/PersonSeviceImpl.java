@@ -2,9 +2,11 @@ package com.example.manager.service.person;
 
 import com.example.manager.data.Person;
 import com.example.manager.data.ResponseFormat;
+import com.example.manager.exception.person.PersonNotFoundException;
 import com.example.manager.repository.person.PersonRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,10 @@ public class PersonSeviceImpl implements PersonService {
 
   @Override
   public Person getData(Long id) {
+    Optional<Person> personData = repo.findById(id);
+    if (personData.isEmpty()) {
+      throw new PersonNotFoundException("Person with id: " + id + " is not found");
+    }
     return repo.findById(id).get();
   }
 

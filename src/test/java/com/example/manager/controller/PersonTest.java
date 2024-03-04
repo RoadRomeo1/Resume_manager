@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.MvcResult;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PersonTest {
+class PersonTest {
 
   @MockBean PersonService manager;
 

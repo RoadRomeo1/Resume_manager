@@ -1,4 +1,4 @@
-package com.example.manager.exception;
+package com.example.manager.exception.person;
 
 public class PersonNotFoundException extends RuntimeException {
   public PersonNotFoundException(String message) {

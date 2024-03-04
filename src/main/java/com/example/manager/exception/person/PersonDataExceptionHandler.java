@@ -1,4 +1,4 @@
-package com.example.manager.exception;
+package com.example.manager.exception.person;
 
 import com.example.manager.data.ResponseFormat;
 import org.springframework.beans.factory.annotation.Autowired;

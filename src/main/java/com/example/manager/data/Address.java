@@ -29,17 +29,17 @@ public class Address {
   @NotNull(message = "House number can not be empty.")
   @Positive(message = "Please enter valid house number.")
   @Column(name = "house_no")
-  private int house_no;
+  private int houseNo;
 
   @NotBlank(message = "Address detail can not be empty")
   @Column(name = "address_details")
-  private String address_details;
+  private String addressDetails;
 
   @Column(name = "landmark")
   private String landmark;
 
   @Column(name = "other_landmark")
-  private String other_landmark;
+  private String otherLandmark;
 
   @NotBlank(message = "City name can not be empty")
   @Column(name = "city")
@@ -47,7 +47,7 @@ public class Address {
 
   @NotNull(message = "Pin code can not be empty")
   @Column(name = "pin_code")
-  private long pin_code;
+  private long pinCode;
 
   @NotBlank(message = "Country name can not be empty")
   @Column(name = "country")

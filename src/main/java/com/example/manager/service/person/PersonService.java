@@ -8,13 +8,13 @@ public interface PersonService {
 
   public List<Person> getAllData();
 
-  public Person getData(Long Id);
+  public Person getData(Long id);
 
   public ResponseFormat saveData(Person personData);
 
-  public ResponseFormat alterData(Person personData, Long Id);
+  public ResponseFormat alterData(Person personData, Long id);
 
   public ResponseFormat dropAllData();
 
-  public ResponseFormat dropData(Long Id);
+  public ResponseFormat dropData(Long id);
 }

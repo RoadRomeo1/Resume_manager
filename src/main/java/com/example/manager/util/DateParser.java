@@ -1,12 +1,15 @@
 package com.example.manager.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 public class DateParser {
 
-  public static Date parseDate(String date) throws Exception {
-    Date parsedDate = new SimpleDateFormat("dd/mm/yyyy").parse(date);
-    return parsedDate;
+  private DateParser() {}
+
+  public static Date parseDate(String date) throws DateTimeParseException, ParseException {
+    return new SimpleDateFormat("dd/mm/yyyy").parse(date);
   }
 }
