@@ -52,7 +52,7 @@ class AddressTest {
 
     Mockito.when(manager.listAllAddresses()).thenReturn(addresses);
 
-    mvc.perform(get(uri + "/findAllAddress/"))
+    mvc.perform(get(uri + "/findAll/"))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", Matchers.hasSize(1)))
         .andExpect(jsonPath("$[0].addressDetails", Matchers.is("test street")));

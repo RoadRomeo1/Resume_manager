@@ -1,6 +1,6 @@
 package com.example.manager.data;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "experince")
+@Table(name = "experience")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,10 +18,10 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class Experience {
 
-  @ApiModelProperty(hidden = true)
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
+  @Hidden
   private Long id;
 
   @NotBlank(message = "Designation can not be blank.")

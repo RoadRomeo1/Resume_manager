@@ -1,6 +1,6 @@
 package com.example.manager.data;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -18,10 +18,10 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class Project {
 
-  @ApiModelProperty(hidden = true)
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
+  @Hidden
   private Long id;
 
   @NotBlank(message = "Project Name can not be blank")

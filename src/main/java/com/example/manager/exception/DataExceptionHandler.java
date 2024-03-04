@@ -1,6 +1,7 @@
-package com.example.manager.exception.person;
+package com.example.manager.exception;
 
 import com.example.manager.data.ResponseFormat;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -9,12 +10,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+@Slf4j
 @ControllerAdvice
-public class PersonDataExceptionHandler {
-
+public class DataExceptionHandler {
   @Autowired ResponseFormat response;
 
-  // handle custom exceptions from validation annotations...
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseStatus(value = HttpStatus.BAD_REQUEST)
   public @ResponseBody ResponseFormat handleValidationExceptions(
@@ -29,6 +29,9 @@ public class PersonDataExceptionHandler {
   @ExceptionHandler(Exception.class)
   @ResponseStatus(value = HttpStatus.BAD_REQUEST)
   public @ResponseBody ResponseFormat handleGenericException(Exception ex) {
+    log.trace("------error at here--------: " + ex.toString());
+    log.error(ex.getStackTrace().toString());
+    log.error(ex.getCause().toString());
     response.setStatus(HttpStatus.BAD_REQUEST.value());
     response.setMessage(ex.getMessage());
     response.setTimeStamp(System.currentTimeMillis());

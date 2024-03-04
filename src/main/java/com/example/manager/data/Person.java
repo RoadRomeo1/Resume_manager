@@ -1,29 +1,27 @@
 package com.example.manager.data;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.util.Set;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "person")
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
 public class Person {
 
   public Person(
       Long id,
-      @NotBlank(message = "First Name can not be empty") String firstName,
-      @NotBlank(message = "Last Name can not be empty") String lastName,
-      @NotBlank(message = "Email can not be empty") @Email String emailId,
-      @NotBlank(message = "Phone number can not be empty") String phone,
+      String firstName,
+      String lastName,
+      String emailId,
+      String phone,
       Set<Address> address) {
     this.id = id;
     this.firstName = firstName;
@@ -33,10 +31,10 @@ public class Person {
     this.address = address;
   }
 
-  @ApiModelProperty(hidden = true)
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
+  @Hidden
   private Long id;
 
   @NotBlank(message = "First Name can not be empty")
