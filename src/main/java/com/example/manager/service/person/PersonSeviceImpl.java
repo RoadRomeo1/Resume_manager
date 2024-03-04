@@ -7,10 +7,12 @@ import com.example.manager.repository.person.PersonRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class PersonSeviceImpl implements PersonService {
 
@@ -31,14 +33,13 @@ public class PersonSeviceImpl implements PersonService {
     if (personData.isEmpty()) {
       throw new PersonNotFoundException("Person with id: " + id + " is not found");
     }
-    return repo.findById(id).get();
+    return personData.get();
   }
 
   @Override
   public ResponseFormat saveData(Person data) {
-
     repo.save(data);
-
+    log.error("after saving operation...");
     format.setStatus(HttpStatus.CREATED.value());
     format.setMessage("Data Saved Successfully");
     format.setTimeStamp(System.currentTimeMillis());

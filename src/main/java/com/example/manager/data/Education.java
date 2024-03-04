@@ -1,7 +1,7 @@
 package com.example.manager.data;
 
 import com.example.manager.data.constants.EducationType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -22,7 +22,7 @@ public class Education {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
-  @JsonIgnore
+  @Hidden
   private Long id;
 
   @NotBlank(message = "Education name must not be empty")
