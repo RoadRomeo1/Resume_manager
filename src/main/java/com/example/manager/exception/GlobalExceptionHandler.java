@@ -55,8 +55,7 @@ public class GlobalExceptionHandler {
             ApiResponse.error(
                 messageSource.getMessage(
                     "error.validation.failed", null, LocaleContextHolder.getLocale()),
-                errors,
-                request.getRequestURI()));
+                errors));
   }
 
   @ExceptionHandler(HttpMessageNotReadableException.class)
@@ -184,8 +183,7 @@ public class GlobalExceptionHandler {
             ApiResponse.error(
                 messageSource.getMessage(
                     "error.validation.failed", null, LocaleContextHolder.getLocale()),
-                errors,
-                request.getRequestURI()));
+                errors));
   }
 
   @ExceptionHandler(PersonNotFoundException.class)
