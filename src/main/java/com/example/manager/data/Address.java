@@ -4,7 +4,8 @@ import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,12 +23,12 @@ public class Address {
   @Hidden
   private Long id;
 
-  @NotNull(message = "House number can not be empty.")
-  @Positive(message = "Please enter valid house number.")
+  @NotNull(message = "{error.address.houseno.required}")
+  @PositiveOrZero(message = "{error.address.houseno.invalid}")
   @Column(name = "house_no")
   private int houseNo;
 
-  @NotBlank(message = "Address detail can not be empty")
+  @NotBlank(message = "{error.address.details.required}")
   @Column(name = "address_details")
   private String addressDetails;
 
@@ -37,15 +38,16 @@ public class Address {
   @Column(name = "other_landmark")
   private String otherLandmark;
 
-  @NotBlank(message = "City name can not be empty")
+  @NotBlank(message = "{error.address.city.required}")
   @Column(name = "city")
   private String city;
 
-  @NotNull(message = "Pin code can not be empty")
+  @NotNull(message = "{error.address.pincode.required}")
+  @Pattern(regexp = "^\\d{6}$", message = "{error.address.pincode.invalid}")
   @Column(name = "pin_code")
-  private long pinCode;
+  private String pinCode;
 
-  @NotBlank(message = "Country name can not be empty")
+  @NotBlank(message = "{error.address.country.required}")
   @Column(name = "country")
   private String country;
 }
