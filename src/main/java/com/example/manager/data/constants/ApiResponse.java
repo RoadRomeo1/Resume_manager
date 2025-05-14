@@ -15,6 +15,7 @@ public class ApiResponse {
   private Object data;
   private List<String> errors;
   private LocalDateTime timestamp;
+  private String path;
 
   public static ApiResponse success(String message, Object data) {
     ApiResponse response = new ApiResponse();
@@ -38,5 +39,11 @@ public class ApiResponse {
     List<String> errorList = new ArrayList<>();
     errorList.add(error);
     return error(message, errorList);
+  }
+
+  public static ApiResponse error(String message, String error, String path) {
+    ApiResponse response = error(message, error);
+    response.path = path;
+    return response;
   }
 }

@@ -17,12 +17,11 @@ public class ResponseFormat {
   private long timeStamp;
 
   public static ApiResponse toApiResponse(ResponseFormat response) {
-    return new ApiResponse(
-        response.getStatus() >= 200 && response.getStatus() < 300,
-        response.getMessage(),
-        null,
-        null,
-        java.time.LocalDateTime.now());
+    if (response.getStatus() >= 200 && response.getStatus() < 300) {
+      return ApiResponse.success(response.getMessage(), null);
+    } else {
+      return ApiResponse.error(response.getMessage(), "Request failed");
+    }
   }
 
   public int getStatus() {
