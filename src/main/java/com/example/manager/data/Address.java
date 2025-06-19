@@ -2,10 +2,7 @@ package com.example.manager.data;
 
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,19 +23,24 @@ public class Address {
   @NotNull(message = "{error.address.houseno.required}")
   @PositiveOrZero(message = "{error.address.houseno.invalid}")
   @Column(name = "house_no")
-  private int houseNo;
+  private Integer houseNo;
 
   @NotBlank(message = "{error.address.details.required}")
+  @Size(min = 5, max = 200, message = "{error.address.details.length}")
   @Column(name = "address_details")
   private String addressDetails;
 
+  @Size(max = 100, message = "{error.address.landmark.length}")
   @Column(name = "landmark")
   private String landmark;
 
+  @Size(max = 100, message = "{error.address.otherlandmark.length}")
   @Column(name = "other_landmark")
   private String otherLandmark;
 
   @NotBlank(message = "{error.address.city.required}")
+  @Size(min = 2, max = 50, message = "{error.address.city.length}")
+  @Pattern(regexp = "^[a-zA-Z\\s-']+$", message = "{error.address.city.format}")
   @Column(name = "city")
   private String city;
 
@@ -48,6 +50,8 @@ public class Address {
   private String pinCode;
 
   @NotBlank(message = "{error.address.country.required}")
+  @Size(min = 2, max = 50, message = "{error.address.country.length}")
+  @Pattern(regexp = "^[a-zA-Z\\s-']+$", message = "{error.address.country.format}")
   @Column(name = "country")
   private String country;
 }

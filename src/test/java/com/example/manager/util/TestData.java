@@ -26,7 +26,7 @@ public class TestData {
     Address addressData =
         new Address(
             id,
-            1,
+            Integer.valueOf(1),
             "test street",
             "test block",
             "near test building",
@@ -37,14 +37,13 @@ public class TestData {
   }
 
   public List<Address> getAddressData(int len) {
-
     List<Address> list = new ArrayList<>(len);
 
     for (int i = 1; i <= len; i++) {
       list.add(
           new Address(
               Long.valueOf(i),
-              i + 1,
+              Integer.valueOf(i + 1),
               "test street" + i,
               "test block- " + i,
               "near test building phase-" + i,

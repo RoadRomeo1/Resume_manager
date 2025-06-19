@@ -38,16 +38,21 @@ public class Person {
   private Long id;
 
   @NotBlank(message = "{error.person.firstname.required}")
+  @Size(min = 2, max = 50, message = "{error.person.firstname.length}")
+  @Pattern(regexp = "^[a-zA-Z\\s-']+$", message = "{error.person.firstname.format}")
   @Column(name = "first_name")
   private String firstName;
 
   @NotBlank(message = "{error.person.lastname.required}")
+  @Size(min = 2, max = 50, message = "{error.person.lastname.length}")
+  @Pattern(regexp = "^[a-zA-Z\\s-']+$", message = "{error.person.lastname.format}")
   @Column(name = "last_name")
   private String lastName;
 
   @NotBlank(message = "{error.person.email.required}")
-  @Column(name = "email")
   @Email(message = "{error.person.email.invalid}")
+  @Size(max = 100, message = "{error.person.email.length}")
+  @Column(name = "email")
   private String emailId;
 
   @NotBlank(message = "{error.person.phone.required}")
