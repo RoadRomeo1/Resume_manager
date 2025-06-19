@@ -37,7 +37,6 @@ public class TestData {
   }
 
   public List<Address> getAddressData(int len) {
-
     List<Address> list = new ArrayList<>(len);
 
     for (int i = 1; i <= len; i++) {

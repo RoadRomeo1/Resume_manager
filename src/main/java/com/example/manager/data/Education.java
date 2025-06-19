@@ -3,9 +3,8 @@ package com.example.manager.data;
 import com.example.manager.data.constants.EducationType;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,31 +33,34 @@ public class Education {
   private Long id;
 
   @NotBlank(message = "{error.education.name.required}")
+  @Size(min = 3, max = 100, message = "{error.education.name.length}")
   @Column(name = "name")
   private String name;
 
-  // Removed @NotBlank annotation as it's not valid for enum types
-  // @NotBlank can only be used with String types, not with enums
+  @NotNull(message = "{error.education.type.required}")
   @Column(name = "type")
   private EducationType type;
 
   @NotBlank(message = "{error.education.university.required}")
+  @Size(min = 3, max = 100, message = "{error.education.university.length}")
   @Column(name = "university")
   private String university;
 
-  // Added year validation to ensure years are between 1900 and current year
+  // Starting year validation: must be >= 1900 and not in future
   @Column(name = "starting_year")
   @Min(value = 1900, message = "{error.education.year.invalid}")
-  @YearNotInFuture(message = "{error.education.year.invalid}")
+  @YearNotInFuture(message = "{error.education.year.future}")
   private int startingYear;
 
+  // Ending year validation: must be >= 1900 and not before current year
   @Column(name = "ending_year")
   @Min(value = 1900, message = "{error.education.year.invalid}")
-  @YearNotInFuture(message = "{error.education.year.invalid}")
+  @YearNotBeforeCurrent(message = "{error.education.year.past}")
   private int endingYear;
 
-  @Column(name = "percentage")
-  @Min(value = 0, message = "{error.education.percentage.invalid}")
-  @Max(value = 100, message = "{error.education.percentage.invalid}")
-  private double percentage;
+  @Column(name = "percentage", precision = 5, scale = 2)
+  @DecimalMin(value = "0.0", message = "{error.education.percentage.invalid}")
+  @DecimalMax(value = "100.0", message = "{error.education.percentage.invalid}")
+  @Digits(integer = 3, fraction = 2, message = "{error.education.percentage.format}")
+  private BigDecimal percentage;
 }
