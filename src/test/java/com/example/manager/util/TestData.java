@@ -31,7 +31,7 @@ public class TestData {
             "test block",
             "near test building",
             "testvile",
-            123456,
+            "123456",
             "testland");
     return addressData;
   }
@@ -49,7 +49,7 @@ public class TestData {
               "test block- " + i,
               "near test building phase-" + i,
               "testvile",
-              101202 + i,
+              String.valueOf(101202 + i),
               "testland"));
     }
     return list;
