@@ -9,7 +9,7 @@
 name: Java CI with Maven
 
 env:
-  DB_URL: ${{secrets.TEST_DB_URL}}
+  DB_URL: ${{secrets.DB_URL}}
   DB_DRIVER: ${{secrets.DB_DRIVER}}
   DB_USERNAME: ${{secrets.DB_USERNAME}}
   DB_PASSWORD: ${{secrets.DB_PASSWORD}}
