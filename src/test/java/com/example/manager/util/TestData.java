@@ -26,7 +26,7 @@ public class TestData {
     Address addressData =
         new Address(
             id,
-            Integer.valueOf(1),
+            1,
             "test street",
             "test block",
             "near test building",
@@ -43,7 +43,7 @@ public class TestData {
       list.add(
           new Address(
               Long.valueOf(i),
-              Integer.valueOf(i + 1),
+              i + 1,
               "test street" + i,
               "test block- " + i,
               "near test building phase-" + i,
