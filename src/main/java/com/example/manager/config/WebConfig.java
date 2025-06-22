@@ -6,6 +6,7 @@ import jakarta.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
@@ -49,6 +50,7 @@ public class WebConfig implements WebMvcConfigurer {
     private final ErrorAttributes errorAttributes;
     private final MessageSource messageSource;
 
+    @Autowired
     public CustomErrorController(ErrorAttributes errorAttributes, MessageSource messageSource) {
       this.errorAttributes = errorAttributes;
       this.messageSource = messageSource;

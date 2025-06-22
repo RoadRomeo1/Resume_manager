@@ -46,12 +46,12 @@ public class Address {
 
   @NotNull(message = "{error.address.pincode.required}")
   @Pattern(regexp = "^\\d{6}$", message = "{error.address.pincode.invalid}")
-  @Column(name = "pin_code")
+  @Column(name = "pin_code", nullable = false)
   private String pinCode;
 
   @NotBlank(message = "{error.address.country.required}")
   @Size(min = 2, max = 50, message = "{error.address.country.length}")
   @Pattern(regexp = "^[a-zA-Z\\s-']+$", message = "{error.address.country.format}")
-  @Column(name = "country")
+  @Column(name = "country", nullable = false)
   private String country;
 }

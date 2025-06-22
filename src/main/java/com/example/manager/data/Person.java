@@ -66,19 +66,23 @@ public class Person {
   private Set<Address> address;
 
   @Valid
-  @OneToMany(cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "person_id", referencedColumnName = "id")
-  private Set<Project> project;
+  private Set<Project> projects;
 
   @Valid
-  @OneToMany(cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "person_id", referencedColumnName = "id")
   private Set<Education> education;
 
   @Valid
-  @OneToMany(cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "person_id", referencedColumnName = "id")
   private Set<Experience> experience;
+
+  private String linkedIn;
+  private String gitHub;
+  private String otherLink;
 
   public void setId(Long id) {
     this.id = id;
