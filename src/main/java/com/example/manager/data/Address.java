@@ -54,4 +54,36 @@ public class Address {
   @Pattern(regexp = "^[a-zA-Z\\s-']+$", message = "{error.address.country.format}")
   @Column(name = "country")
   private String country;
+
+  public Long getId() {
+    return id;
+  }
+
+  public Integer getHouseNo() {
+    return houseNo;
+  }
+
+  public String getAddressDetails() {
+    return addressDetails;
+  }
+
+  public String getLandmark() {
+    return landmark;
+  }
+
+  public String getOtherLandmark() {
+    return otherLandmark;
+  }
+
+  public String getCity() {
+    return city;
+  }
+
+  public String getCountry() {
+    return country;
+  }
+
+  public String getPinCode() {
+    return pinCode;
+  }
 }

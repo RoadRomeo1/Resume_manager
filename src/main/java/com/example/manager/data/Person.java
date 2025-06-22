@@ -80,6 +80,42 @@ public class Person {
   @JoinColumn(name = "person_id", referencedColumnName = "id")
   private Set<Experience> experience;
 
+  private String linkedIn;
+  private String gitHub;
+  private String otherLink;
+
+  public Long getId() {
+    return id;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public String getEmailId() {
+    return emailId;
+  }
+
+  public String getPhone() {
+    return phone;
+  }
+
+  public String getLinkedIn() {
+    return linkedIn;
+  }
+
+  public String getGitHub() {
+    return gitHub;
+  }
+
+  public String getOtherLink() {
+    return otherLink;
+  }
+
   public void setId(Long id) {
     this.id = id;
   }

@@ -1,6 +1,6 @@
 package com.example.manager.service.address;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import com.example.manager.data.Address;
@@ -10,27 +10,30 @@ import com.example.manager.repository.address.AddressRepository;
 import com.example.manager.util.TestData;
 import java.util.List;
 import java.util.Optional;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@SpringBootTest
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 class AddressServiceImplTest {
 
-  @InjectMocks AddressServiceImpl manager;
+  @InjectMocks private AddressServiceImpl manager;
 
-  @Mock AddressRepository repository;
+  @Mock private AddressRepository repository;
 
-  @Autowired TestData data;
+  private TestData data;
 
-  @Mock ResponseFormat response;
+  @Mock private ResponseFormat response;
+
+  @BeforeEach
+  void setUp() {
+    data = new TestData();
+  }
 
   @Test
   void listAllAddresses() {
@@ -109,7 +112,6 @@ class AddressServiceImplTest {
 
   @Test
   void deleteAllAddress() {
-
     response.setStatus(HttpStatus.OK.value());
     response.setMessage("All records deleted");
     response.setTimeStamp(System.currentTimeMillis());

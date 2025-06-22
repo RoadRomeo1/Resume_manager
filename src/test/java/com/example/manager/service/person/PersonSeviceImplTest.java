@@ -9,27 +9,30 @@ import com.example.manager.repository.person.PersonRepository;
 import com.example.manager.util.TestData;
 import java.util.List;
 import java.util.Optional;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@SpringBootTest
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 class PersonSeviceImplTest {
 
-  @InjectMocks PersonSeviceImpl manager;
+  @InjectMocks private PersonSeviceImpl manager;
 
-  @Mock PersonRepository repository;
+  @Mock private PersonRepository repository;
 
-  @Autowired TestData data;
+  private TestData data;
 
-  @Mock ResponseFormat response;
+  @Mock private ResponseFormat response;
+
+  @BeforeEach
+  public void setUp() {
+    data = new TestData();
+  }
 
   @Test
   void getAllData() {
