@@ -2,6 +2,7 @@ package com.example.manager.config;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -24,24 +25,22 @@ public class SecurityConfig {
   private String[] csrfIgnoredPaths;
 
   @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-  }
-
-  @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.cors(withDefaults())
-        .authorizeHttpRequests(
-            authz -> authz.anyRequest().permitAll() // Change to .authenticated() to restrict
-            )
+        .authorizeHttpRequests(authz -> authz.anyRequest().permitAll())
         .csrf(csrf -> csrf.ignoringRequestMatchers(csrfIgnoredPaths));
     return http.build();
   }
 
   @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
+
+  @Bean
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(List.of(allowedOrigins));
+    configuration.setAllowedOrigins(Arrays.asList(allowedOrigins));
     configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
     configuration.setAllowedHeaders(List.of("*"));
     configuration.setAllowCredentials(false); // Set to true if you need cookies/auth
