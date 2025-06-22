@@ -1,10 +1,13 @@
 package com.example.manager.config;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -18,13 +21,11 @@ public class SecurityConfig {
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.cors() // Enable CORS
-        .and()
+    http.cors(withDefaults())
         .authorizeHttpRequests(
             authz -> authz.anyRequest().permitAll() // Change to .authenticated() to restrict
             )
-        .csrf()
-        .disable(); // Disable CSRF for APIs/demo
+        .csrf(AbstractHttpConfigurer::disable); // Disable CSRF for APIs/demo
     return http.build();
   }
 
