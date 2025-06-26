@@ -9,6 +9,11 @@
 name: Java CI with Maven
 permissions:
   contents: read
+  id-token: write
+  actions: read
+  security-events: write
+  packages: read
+  deployments: write
 
 env:
   DB_URL: ${{secrets.DB_URL}}
